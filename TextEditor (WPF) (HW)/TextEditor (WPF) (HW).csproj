@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>TextEditor__WPF___HW_</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\AlignCenter.png" />
+    <None Remove="Resources\AlignLeft.png" />
+    <None Remove="Resources\AlignRight.png" />
+    <None Remove="Resources\Bold.png" />
+    <None Remove="Resources\Cancel.png" />
+    <None Remove="Resources\Copy.png" />
+    <None Remove="Resources\Cut.png" />
+    <None Remove="Resources\Editor.png" />
+    <None Remove="Resources\FolderOpenBlue.png" />
+    <None Remove="Resources\FontDialogControl.png" />
+    <None Remove="Resources\Italic.png" />
+    <None Remove="Resources\OpenFile.png" />
+    <None Remove="Resources\Paste.png" />
+    <None Remove="Resources\Save.png" />
+    <None Remove="Resources\SaveAs.png" />
+    <None Remove="Resources\Underline.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\AlignCenter.png" />
+    <Resource Include="Resources\AlignLeft.png" />
+    <Resource Include="Resources\AlignRight.png" />
+    <Resource Include="Resources\Bold.png" />
+    <Resource Include="Resources\Cancel.png" />
+    <Resource Include="Resources\Copy.png" />
+    <Resource Include="Resources\Cut.png" />
+    <Resource Include="Resources\Editor.png" />
+    <Resource Include="Resources\FolderOpenBlue.png" />
+    <Resource Include="Resources\FontDialogControl.png" />
+    <Resource Include="Resources\Italic.png" />
+    <Resource Include="Resources\OpenFile.png" />
+    <Resource Include="Resources\Paste.png" />
+    <Resource Include="Resources\Save.png" />
+    <Resource Include="Resources\SaveAs.png" />
+    <Resource Include="Resources\Underline.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="ResourcePNG.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourcePNG.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resource.uk.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ResourcePNG.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourcePNG.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

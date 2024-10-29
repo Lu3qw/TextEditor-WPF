@@ -1,0 +1,174 @@
+﻿<Window x:Class="TextEditor__WPF___HW_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextEditor__WPF___HW_"
+        mc:Ignorable="d"
+        Title="TextEditor" Height="450" Width="800" Icon="Resources/Editor.png">
+
+    <Window.CommandBindings>
+        <CommandBinding x:Name="openFileCommandBinding" Command="ApplicationCommands.Open" Executed="openFileCommandBinding_Executed"/>
+        <CommandBinding x:Name="saveFileCommandBinding" Command="Save" Executed="saveFileCommandBinding_Executed" CanExecute="saveFileCommandBinding_CanExecute"/>
+        <CommandBinding x:Name="saveAsFileCommandBinding" Command="SaveAs" Executed="saveAsFileCommandBinding_Executed"/>
+
+        <CommandBinding x:Name="leftAlignCommandBinding" Command="AlignLeft" Executed="leftAlignCommandBinding_Executed"/>
+        <CommandBinding x:Name="centerAlignCommandBinding" Command="AlignCenter" Executed="centerAlignCommandBinding_Executed"/>
+        <CommandBinding x:Name="rightAlignCommandBinding" Command="AlignRight" Executed="rightAlignCommandBinding_Executed"/>
+
+        <CommandBinding x:Name="toggleItalicCommandBinding" Command="ToggleItalic" Executed="toggleItalicCommandBinding_Executed"/>
+        <CommandBinding x:Name="toggleUnderlineCommandBinding" Command="ToggleUnderline" Executed="toggleUnderlineCommandBinding_Executed"/>
+        <CommandBinding x:Name="toggleBoldCommandBinding" Command="ToggleBold" Executed="toggleBoldCommandBinding_Executed"/>
+
+    </Window.CommandBindings>
+
+    <DockPanel Name="mainPanel" LastChildFill="True">
+
+        <Menu Name="mainMenu" DockPanel.Dock="Top" Background="{DynamicResource backgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+            <MenuItem Name="fileMainMenuItem" Header="{x:Static local:Resource.fileMainMenuItem}" Background="{DynamicResource backgroundBrush}">
+
+                <MenuItem Name="openFileMenuItem" Command="Open" Header="{x:Static local:Resource.openFileMenuItem}" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/OpenFile.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="SaveFileMenuItem" Command="Save" Header="{x:Static local:Resource.saveFileMenuItem}" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Save.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="SaveAsFileMenuItem" Command="SaveAs" Header="{x:Static local:Resource.saveAsFileMenuItem}" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/SaveAs.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Name="ExitMenuItem" Header="{x:Static local:Resource.exitMenuItem}" InputGestureText="Alt+F4" Click="ExitMenuItem_Click" Background="{DynamicResource barBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Cancel.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+            </MenuItem>
+
+            <MenuItem Name="editMainMenuItem" Header="{x:Static local:Resource.editMainMenuItem}" Background="{DynamicResource backgroundBrush}">
+
+                <MenuItem Name="cutMenuItem" Command="Cut" Header="{x:Static local:Resource.cutMenuItem}" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Cut.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="copyMenuItem" Command="Copy" Header="{x:Static local:Resource.copyMenuItem}" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Copy.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="pasteMenuItem" Command="Paste" Header="{x:Static local:Resource.pasteMenuItem}" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Paste.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+            </MenuItem>
+
+            <MenuItem Name="formatMainMenuItem" Header="{x:Static local:Resource.formatMainMenuItem}" Background="{DynamicResource backgroundBrush}">
+                <MenuItem Header="{x:Static local:Resource.alignMenuItem}" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                    <MenuItem Name="alignLeftMenuItem" Command="AlignLeft" Header="{x:Static local:Resource.alignLeftMenuItem}" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/AlignLeft.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="alignCenterMenuItem" Command="AlignCenter" Header="{x:Static local:Resource.alignCenterMenuItem}" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/AlignCenter.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="alignRightMenuItem" Command="AlignRight" Header="{x:Static local:Resource.alignRightMenuItem}" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/AlignRight.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+
+            <MenuItem Name="themeMainMenuItem" Header="{x:Static local:Resource.themeMenuItem}" Background="{DynamicResource backgroundBrush}">
+                <MenuItem Name="lightThemeMenuItem" Header="{x:Static local:Resource.lightThemeMenuItem}" Tag="LightThemeDictionary" Click="ThemeMenuItem_Click" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}"/>
+                <MenuItem Name="darkThemeMenuItem" Header="{x:Static local:Resource.darkThemeMenuItem}" Tag="DarkThemeDictionary" Click="ThemeMenuItem_Click" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}"/>
+                <MenuItem Name="darkplusThemeMenuItem" Header="{x:Static local:Resource.darkplusThemeMenuItem}" Tag="DarkPlusThemeDictionary" Click="ThemeMenuItem_Click" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}"/>
+                <MenuItem Name="pinkThemeMenuItem" Header="{x:Static local:Resource.pinkThemeMenuItem}" Tag="PinkThemeDictionary" Click="ThemeMenuItem_Click" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}"/>
+            </MenuItem>
+
+        </Menu>
+
+        <ToolBarTray DockPanel.Dock="Top" Height="70" Background="{DynamicResource barBackgroundBrush}">
+            <ToolBar Name="fileToolBar" Band="0" Height="35" Background="{DynamicResource backgroundBrush}">
+                <Button Name="saveFileButton" Command="Save" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/Save.png"/>
+                </Button>
+                <Button Name="openFileButton" Command="Open" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/FolderOpenblue.png"/>
+                </Button>
+            </ToolBar>
+
+            <ToolBar Name="editToolBar" Band="0" Height="35" Background="{DynamicResource backgroundBrush}">
+                <Button Name="cutButton" Command="Cut" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/Cut.png"/>
+                </Button>
+                <Button Name="copyButton" Command="Copy" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/Copy.png"/>
+                </Button>
+                <Button Name="pasteButton" Command="Paste" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/Paste.png"/>
+                </Button>
+            </ToolBar>
+
+            <ToolBar Name="fontToolBar" Band="1" Height="35" Background="{DynamicResource backgroundBrush}">
+                <Button Name="italicButton" Command="ToggleItalic" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/Italic.png"/>
+                </Button>
+                <Button Name="underlineButton" Command="ToggleUnderline" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/Underline.png"/>
+                </Button>
+                <Button Name="boldButton" Command="ToggleBold" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/Bold.png"/>
+                </Button>
+            </ToolBar>
+
+            <ToolBar Name="textFontsToolBar" Band="1" Height="35" Background="{DynamicResource backgroundBrush}">
+                <Button Name="alignLeftButton" Command="AlignLeft" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/AlignLeft.png"/>
+                </Button>
+                <Button Name="alignCenterButton" Command="AlignCenter" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/AlignCenter.png"/>
+                </Button>
+                <Button Name="alignRightButton" Command="AlignRight" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/AlignRight.png"/>
+                </Button>
+
+                <Label Content="{x:Static local:Resource.fontFamilyLabel}" FontSize="13" Background="{DynamicResource elementsBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}"/>
+
+                <Button Name="fontDialogControlButton" Click="fontDialogControlButton_Click" Background="{DynamicResource elementsBackgroundBrush}">
+                    <Image Source="Resources/FontDialogControl.png"/>
+                </Button>
+
+            </ToolBar>
+            
+        </ToolBarTray>
+
+        <StatusBar Name="infoStatusBar" DockPanel.Dock="Bottom" Background="{DynamicResource barBackgroundBrush}" Foreground="{DynamicResource foregroundBrush}">
+            <StatusBarItem>
+                <StackPanel  Orientation="Horizontal">
+                    <Label Content="{x:Static local:Resource.lineLabel}" FontSize="13" Foreground="{DynamicResource foregroundBrush}"/>
+                    <Label Name="lineLabel" Content="0," FontSize="13" Foreground="{DynamicResource foregroundBrush}"/>
+                    <Label Content="{x:Static local:Resource.charLabel}" FontSize="13" Foreground="{DynamicResource foregroundBrush}"/>
+                    <Label Name="charLabel" Content="0"  FontSize="13" Foreground="{DynamicResource foregroundBrush}"/>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+
+
+        <TextBox Name="mainTextBox" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" TextChanged="mainTextBox_TextChanged" Background="{DynamicResource backgroundBrush}" Foreground="{DynamicResource foregroundBrush}"/>
+
+    </DockPanel>
+    
+</Window>
